@@ -66,6 +66,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let callSaveRetrieveMethod = SaveRetrieveFunctions()
         let setWordsCount = callSaveRetrieveMethod.setWords.count
         if setWordsCount > 0 { totalAmount.text = String(setWordsCount) }
+        print("bad boys bad boys what we gotta do")
         return totalAmount.text!
     }
     

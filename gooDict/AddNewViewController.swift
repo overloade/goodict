@@ -91,6 +91,7 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
         trView.center = view.center
         exView.frame.size = exViewNewSize
         exView.center = view.center
+        print("lets print something")
     }
     
     var previousPosition:CGRect = CGRect.zero
