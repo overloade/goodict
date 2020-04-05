@@ -12,6 +12,7 @@ import CoreData
 class AddNewViewController: UIViewController, UITextViewDelegate {
     
     let callSaveRetrieveMethod = SaveRetrieveFunctions()
+    var checkEditOrAdd = true // checker
    
     @IBOutlet weak var wordView: UITextView!
     @IBOutlet weak var trView: UITextView!
@@ -24,8 +25,6 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
     var editedWord: String = ""
     var editedTranslation: String = ""
     var editedExample: String = ""
-    
-    var checkEditOrAdd = true // checker
     
     override func viewWillAppear(_ animated: Bool) {
          navigationController?.navigationBar.isHidden = false
