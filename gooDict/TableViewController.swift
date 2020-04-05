@@ -14,8 +14,7 @@ class TableViewController: UITableViewController {
     var detailedWord = ""
     var detailedTranslation = ""
     var detailedExample = ""
-
-    var getWords: GetWordsList
+    var saveRetrieve: SaveRetrieveFunctions
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
@@ -27,27 +26,18 @@ class TableViewController: UITableViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        getWords = GetWordsList()
+        saveRetrieve = SaveRetrieveFunctions()
         super.init(coder: aDecoder)
     }
     
-    /*
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        print("Accessory btn tapped")
-    }
-    */
-
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            
-            let item = getWords.returnTheRowArray()[indexPath.row]
-            getWords.removeItem(passedItem: item, at: indexPath.row)
+            let item = saveRetrieve.giveRowToTableView()[indexPath.row]
+            saveRetrieve.removeItem(passedItem: item, at: indexPath.row)
             let indexPaths = [indexPath]
-            //tableView.deleteRows(at: indexPaths, with: UITableView.RowAnimation.automatic)
-            
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            let managedContext = appDelegate!.persistentContainer.viewContext
+            let managedContext = CoreDataManager.shared.context
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EngDict")
              
             do {
@@ -61,48 +51,25 @@ class TableViewController: UITableViewController {
             
             tableView.deleteRows(at: indexPaths, with: UITableView.RowAnimation.automatic)
             tableView.reloadData()
-            
-            /*
-            self.tableView.beginUpdates()
-            tableView.reloadRows(at: [indexPath], with: .top)
-            tableView.reloadData()
-            self.tableView.endUpdates()
-            */
-            
-            /*
-            let commit = commits[indexPath.row]
-            container.viewContext.delete(commit)
-            commits.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-
-            saveContext()
-            */
-            
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Worditem", for: indexPath) as! TableViewCell
-        //cell.editingAccessoryType = .detailButton
-        let items = getWords.returnTheRowArray()
+        let items = saveRetrieve.giveRowToTableView()
         let item = items[indexPath.row]
         configureWord(for: cell, with: item)
-        // detailedWord = cell.wordDict.text!
-        // detailedExample = cell.exampleDict.text!
-        // detailedTranslation = cell.translationDict.text!
         return cell
     }
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return getWords.returnTheRowArray().count
+        return saveRetrieve.giveRowToTableView().count
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath) != nil {
-        // if let cell = tableView.cellForRow(at: indexPath) {
-            let items = getWords.returnTheRowArray()
+            let items = saveRetrieve.giveRowToTableView()
             let item = items[indexPath.row]
             detailedWord = item.textWord
             detailedTranslation = item.textTranslation
@@ -117,19 +84,6 @@ class TableViewController: UITableViewController {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-    
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "searchDetailsSegue") {
-            let destinationVC:DetailedInfoViewController = segue.destination as! DetailedInfoViewController
-            print("detailedWord from func prepare() = \(detailedWord), and \(detailedExample) and \(detailedTranslation)")
-            destinationVC.detailWord = detailedWord
-            destinationVC.detailExample = detailedExample
-            destinationVC.detailTranslation = detailedTranslation
-        }
-        else { return }
-    }
-    */
 
     func configureWord(for cell: UITableViewCell, with item: WordItem) {
           if let checkmarkCell = cell as? TableViewCell {

@@ -23,18 +23,13 @@ class DetailedInfoViewController: UIViewController {
     @IBOutlet weak var labelTranslation: UILabel!
     @IBOutlet weak var labelExample: UILabel!
     
-    
-    
     var detailWord: String = ""
     var detailTranslation: String = ""
     var detailExample: String = ""
     
     override func viewWillAppear(_ animated: Bool) {
-         navigationController?.navigationBar.isHidden = false
-     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = false
+        
         labelWord.sizeToFit()
         labelTranslation.sizeToFit()
         labelExample.sizeToFit()
@@ -42,6 +37,10 @@ class DetailedInfoViewController: UIViewController {
         labelWord.text = detailWord
         labelTranslation.text = detailTranslation
         labelExample.text = detailExample
+     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,29 +52,3 @@ class DetailedInfoViewController: UIViewController {
         }
     }
 }
-
-/*
-extension UIViewController {
-    func showSpinner(onView : UIView) {
-           let spinnerView = UIView.init(frame: onView.bounds)
-           spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-           let ai = UIActivityIndicatorView.init(style: .large)
-           ai.startAnimating()
-           ai.center = spinnerView.center
-           
-           DispatchQueue.main.async {
-               spinnerView.addSubview(ai)
-               onView.addSubview(spinnerView)
-           }
-           
-           self.vSpinner = spinnerView
-       }
-
-       func removeSpinner() {
-           DispatchQueue.main.async {
-            self.vSpinner?.removeFromSuperview()
-            self.vSpinner = nil
-           }
-       }
-}
-*/

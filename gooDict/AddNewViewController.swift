@@ -10,20 +10,22 @@ import UIKit
 import CoreData
 
 class AddNewViewController: UIViewController, UITextViewDelegate {
+    
+    let callSaveRetrieveMethod = SaveRetrieveFunctions()
    
     @IBOutlet weak var wordView: UITextView!
     @IBOutlet weak var trView: UITextView!
     @IBOutlet weak var exView: UITextView!
     
-    var detailWord: String = "" // edited Word string
-    var detailTranslation: String = "" // edited Translation string
-    var detailExample: String = "" // edited Example string
+    var detailWord: String = "" // got from DetailedInfoViewController
+    var detailTranslation: String = "" // got from DetailedInfoViewController
+    var detailExample: String = "" // got from DetailedInfoViewController
     
     var editedWord: String = ""
     var editedTranslation: String = ""
     var editedExample: String = ""
     
-    var checkEditOrAdd: Bool = true // checker
+    var checkEditOrAdd = true // checker
     
     override func viewWillAppear(_ animated: Bool) {
          navigationController?.navigationBar.isHidden = false
@@ -45,13 +47,15 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
         wordView.layer.cornerRadius = 10
         trView.layer.cornerRadius = 10
         exView.layer.cornerRadius = 10
- 
+        
         wordView.text = detailWord
         trView.text = detailTranslation
         exView.text = detailExample
-   
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+ 
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
     
         if wordView.text!.isEmpty && trView.text!.isEmpty && exView.text!.isEmpty {
             checkEditOrAdd = false
@@ -79,7 +83,7 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        let maxHeight = UIScreen.main.bounds.height - 40 // was 20
+        let maxHeight = UIScreen.main.bounds.height - 20 // was 20
         let fixedWidth = textView.frame.size.width
         let wordViewNewSize = wordView.sizeThatFits(CGSize(width: fixedWidth, height: maxHeight))
         let trViewNewSize = trView.sizeThatFits(CGSize(width: fixedWidth, height: maxHeight))
@@ -91,73 +95,46 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
         trView.center = view.center
         exView.frame.size = exViewNewSize
         exView.center = view.center
-        print("lets print something")
-        print("or what they want")
-        print("additional new message")
     }
-    
-    var previousPosition:CGRect = CGRect.zero
  
     @IBAction func addNewButton(_ sender: UIButton) {
         editedWord = wordView.text!
         editedTranslation = trView.text!
         editedExample = exView.text!
-
-        checkEditOrAdd ? editData() : addNewData()
-     }
-    
-    func editData() {
-        let callSaveRetrieveMethod = SaveRetrieveFunctions()
-        if callSaveRetrieveMethod.editInArrays(word: detailWord, translation: detailTranslation, example: detailExample, newWord: editedWord,  newTranslation: editedTranslation, newExample: editedExample) {
-            let message = "Successfully edited."
-            let alert = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(action)
-            present(alert, animated: true, completion: nil)
-            wordView.text?.removeAll()
-            exView.text?.removeAll()
-            trView.text?.removeAll()
-        }
+        
+        if wordView.text!.isEmpty || trView.text!.isEmpty || exView.text!.isEmpty {
+            displayMessage(textMessage: "One of the strings is empty. Please fill in all fields.",                             newHandler: nil)
+        } else { checkEditOrAdd ? editData() : addNewData() }
     }
     
+    func returnToStartingScreen(alert: UIAlertAction!) {
+        let vc = self.storyboard?.instantiateViewController(identifier: "returnToStartingScreen") as! ViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func editData() {
+        callSaveRetrieveMethod.editInArrays(oldWord: detailWord, oldTranslation: detailTranslation, oldExample: detailExample, newWord: editedWord, newTranslation: editedTranslation, newExample: editedExample) ?
+            displayMessage(textMessage: "Successfully edited.", newHandler: returnToStartingScreen) : displayMessage(textMessage: "Error occured.", newHandler: nil)
+    }
+        
     func addNewData() {
-        let newAddedWord = wordView.text!
-        let newAddedTranslation = trView.text!
-        let newAddedExample = exView.text!
-            
-        if newAddedWord.isEmpty || newAddedTranslation.isEmpty || newAddedExample.isEmpty  {
-            let message = "One of the strings is empty. Please fill all fields."
-            let alert = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(action)
-            present(alert, animated: true, completion: nil)
+        if callSaveRetrieveMethod.setWords.contains(wordView.text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)) {
+            displayMessage(textMessage: "Word have already been found in dictionary. Please, correct the word or mark with (2), (3), (4) tag version.", newHandler: nil)
         } else {
-            let callSaveRetrieveMethod = SaveRetrieveFunctions()
-            if callSaveRetrieveMethod.addInArrays(word: newAddedWord, translation: newAddedTranslation, example: newAddedExample) {
-                let message = "Successful."
-                let alert = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(action)
-                present(alert, animated: true, completion: nil)
-                wordView.text?.removeAll()
-                exView.text?.removeAll()
-                trView.text?.removeAll()
-            }
+            callSaveRetrieveMethod.addInArrays(newWord: wordView.text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines), newTranslation: trView.text, newExample: exView.text) ? displayMessage(textMessage: "Successful.", newHandler: returnToStartingScreen) : displayMessage(textMessage: "Error occured.", newHandler: returnToStartingScreen)
         }
     }
 }
 
 extension UITextView {
-    
     func addDoneButton(title: String, target: Any, selector: Selector) {
-        
         let toolBar = UIToolbar(frame: CGRect(x: 0.0,
                                               y: 0.0,
                                               width: UIScreen.main.bounds.size.width,
-                                              height: 44.0))//1
-        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)//2
-        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)//3
-        toolBar.setItems([flexible, barButton], animated: false)//4
-        self.inputAccessoryView = toolBar//5
+                                              height: 44.0))
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)
+        toolBar.setItems([flexible, barButton], animated: false)
+        self.inputAccessoryView = toolBar
     }
 }

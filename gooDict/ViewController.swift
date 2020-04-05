@@ -16,72 +16,59 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var pickerData: [String] = [String]()
     
+    let callSaveRetrieveMethod = SaveRetrieveFunctions()
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-           if (CoreDataEntityValidationManager.shared.bankEntityIsEmpty && identifier == "searchSegue") || (CoreDataEntityValidationManager.shared.bankEntityIsEmpty && identifier == "randomSegue") {
-                let message = "Error. No data"
-                let alert = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(action)
-                present(alert, animated: true, completion: nil)
+        switch identifier {
+        case "searchSegue":
+            if CoreDataEntityValidationManager.shared.dataEntityIsEmpty {
+                displayMessage(textMessage: "Error (no data)", newHandler: nil)
                 return false
-           } else if identifier == "searchSegue" {
+            } else {
                 if searchField.text!.isEmpty {
-                    let message = "Search request is empty. Please type anything."
-                    let alert = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
-                    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(action)
-                    present(alert, animated: true, completion: nil)
+                    displayMessage(textMessage: "Searching request is empty. Please type anything.",
+                                   newHandler: nil)
                     return false
                 } else {
-                    let callSaveRetrieveMethod = SaveRetrieveFunctions()
-                    
                     if callSaveRetrieveMethod.searchInArrays(searchedWord: searchField.text!) {
                         return true
                     } else {
-                        let message = "Nothing found"
-                        let alert = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
-                        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        alert.addAction(action)
-                        present(alert, animated: true, completion: nil)
+                        displayMessage(textMessage: "Nothing found", newHandler: nil)
                         return false
                     }
                 }
-           } else if identifier == "addSegue" {
-                return true
-           } else if identifier == "randomSegue" {
-                let callSaveRetrieveMethod = SaveRetrieveFunctions()
+            }
+        case "randomSegue":
+            if CoreDataEntityValidationManager.shared.dataEntityIsEmpty {
+                displayMessage(textMessage: "Error (no data)", newHandler: nil)
+                return false
+            } else {
                 callSaveRetrieveMethod.randomInArrays()
                 return true
-           } else {
-                let message = "Nothing found."
-                let alert = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(action)
-                present(alert, animated: true, completion: nil)
-                return false
+            }
+        case "addSegue":
+            return true
+        default:
+            displayMessage(textMessage: "Nothing found", newHandler: nil)
+            return false
         }
     }
 
-    func countTheTotalNumber() -> String {
-        let callSaveRetrieveMethod = SaveRetrieveFunctions()
-        let setWordsCount = callSaveRetrieveMethod.setWords.count
-        if setWordsCount > 0 { totalAmount.text = String(setWordsCount) }
-        return totalAmount.text!
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
-        countTheTotalNumber()
+        if callSaveRetrieveMethod.setWords.count > 0 {
+            totalAmount.text = String(callSaveRetrieveMethod.setWords.count)
+        } else { totalAmount.text = "0" }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pickerData = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
-        "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
-        "W", "X", "Y", "Z"]
-
+        pickerData = ["A", "B", "C", "D", "E", "F", "G", "H", "I",
+                      "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+                      "S", "T", "U", "V", "W", "X", "Y", "Z"]
         self.pickerFromList.delegate = self
         self.pickerFromList.dataSource = self
+        self.hideKeyboard()
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -106,4 +93,26 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return NSAttributedString(string: pickerData[row], attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
     }
     
+}
+
+extension UIViewController {
+    func displayMessage(textMessage: String, newHandler: ((UIAlertAction) -> Void)?) {
+        let alert = UIAlertController(title: "Message", message: textMessage, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: newHandler)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    func hideKeyboard()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(UIViewController.dismissKeyboard))
+
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
 }

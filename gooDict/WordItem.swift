@@ -13,13 +13,5 @@ class WordItem: NSObject {
     @objc var textWord = ""
     @objc var textTranslation = ""
     @objc var textExample = ""
-    
-    var checked = false
-    
-    func toggleChecked() {
-        checked = !checked
-    }
-    
-    
-
+        
 }

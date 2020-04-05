@@ -13,7 +13,7 @@ class CoreDataEntityValidationManager {
     static let shared = CoreDataEntityValidationManager()
     private init(){}
     
-    var bankEntityIsEmpty: Bool {
+    var dataEntityIsEmpty: Bool {
         do {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EngDict")
             let count = try CoreDataManager.shared.context.count(for: fetchRequest)

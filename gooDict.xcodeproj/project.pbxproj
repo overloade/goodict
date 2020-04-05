@@ -19,7 +19,6 @@
 		F458841B240C1EC200C9A512 /* DetailedInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F458841A240C1EC200C9A512 /* DetailedInfoViewController.swift */; };
 		F458841D240C3C1700C9A512 /* CoreDataEntityValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F458841C240C3C1700C9A512 /* CoreDataEntityValidationManager.swift */; };
 		F458841F240C3FB000C9A512 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F458841E240C3FB000C9A512 /* CoreDataManager.swift */; };
-		F45F6B01240110FB009E53B5 /* GetWordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45F6B00240110FB009E53B5 /* GetWordsList.swift */; };
 		F45F6B072401117E009E53B5 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45F6B062401117E009E53B5 /* TableViewController.swift */; };
 		F45F6B0B240111B2009E53B5 /* WordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45F6B0A240111B2009E53B5 /* WordItem.swift */; };
 		F45F6B0D240111CB009E53B5 /* AddNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45F6B0C240111CB009E53B5 /* AddNewViewController.swift */; };
@@ -43,7 +42,6 @@
 		F458841A240C1EC200C9A512 /* DetailedInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInfoViewController.swift; sourceTree = "<group>"; };
 		F458841C240C3C1700C9A512 /* CoreDataEntityValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntityValidationManager.swift; sourceTree = "<group>"; };
 		F458841E240C3FB000C9A512 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		F45F6B00240110FB009E53B5 /* GetWordsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWordsList.swift; sourceTree = "<group>"; };
 		F45F6B062401117E009E53B5 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		F45F6B0A240111B2009E53B5 /* WordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordItem.swift; sourceTree = "<group>"; };
 		F45F6B0C240111CB009E53B5 /* AddNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewViewController.swift; sourceTree = "<group>"; };
@@ -89,18 +87,17 @@
 				F458841E240C3FB000C9A512 /* CoreDataManager.swift */,
 				F45F6B062401117E009E53B5 /* TableViewController.swift */,
 				F41C2FEC24031BDB001896C5 /* TableViewCell.swift */,
-				F45F6B00240110FB009E53B5 /* GetWordsList.swift */,
 				F45F6B0A240111B2009E53B5 /* WordItem.swift */,
 				F45F6B0C240111CB009E53B5 /* AddNewViewController.swift */,
 				F458841A240C1EC200C9A512 /* DetailedInfoViewController.swift */,
 				F445B4F62406F4D1000EE8CE /* SaveRetrieveFunctions.swift */,
 				F4ED69C02420884B00F07F22 /* PopUpViewController.swift */,
-				F403314823F36C69004DB13B /* Main.storyboard */,
-				F403314B23F36C6C004DB13B /* Assets.xcassets */,
-				F403315D23F3778F004DB13B /* DataModel.xcdatamodeld */,
 				F464ED5523FE438C0095ADB2 /* EngDict+CoreDataClass.swift */,
 				F464ED5623FE438C0095ADB2 /* EngDict+CoreDataProperties.swift */,
+				F403314823F36C69004DB13B /* Main.storyboard */,
 				F403314D23F36C6C004DB13B /* LaunchScreen.storyboard */,
+				F403314B23F36C6C004DB13B /* Assets.xcassets */,
+				F403315D23F3778F004DB13B /* DataModel.xcdatamodeld */,
 				F403315023F36C6C004DB13B /* Info.plist */,
 			);
 			path = gooDict;
@@ -189,7 +186,6 @@
 				F403314523F36C69004DB13B /* SceneDelegate.swift in Sources */,
 				F458841D240C3C1700C9A512 /* CoreDataEntityValidationManager.swift in Sources */,
 				F445B4F72406F4D1000EE8CE /* SaveRetrieveFunctions.swift in Sources */,
-				F45F6B01240110FB009E53B5 /* GetWordsList.swift in Sources */,
 				F464ED5723FE438C0095ADB2 /* EngDict+CoreDataClass.swift in Sources */,
 				F458841B240C1EC200C9A512 /* DetailedInfoViewController.swift in Sources */,
 				F45F6B0B240111B2009E53B5 /* WordItem.swift in Sources */,

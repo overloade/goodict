@@ -8,10 +8,11 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class CoreDataManager {
     
-    static let shared = CoreDataManager()
+    static let shared = CoreDataManager()    
     private init() {}
     
     lazy var persistentContainer: NSPersistentContainer = {
