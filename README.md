@@ -11,6 +11,6 @@ Available functions:
 
 App is based on SQL database (Core Data).
 
-There are few additional functions that can be used if implemented in a proper way such as:
+There are few additional functions that can be used if they're implemented in a proper way such as:
 - backup and restore database;
 - delete all records in base.
