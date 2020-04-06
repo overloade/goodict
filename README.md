@@ -11,7 +11,7 @@
 <table align="center" border="0">
 
 <tr>
-<td> <img src="https://i.imgur.com/qm8yzzT.png"> </td>
+<td> <img src="https://i.imgur.com/qm8yzzT.png?1"> </td>
 <td> <img src="https://i.imgur.com/8l2Wxox.png"> </td>
 <td> <img src="https://i.imgur.com/VQRNB0U.png"> </td>
 </tr>
