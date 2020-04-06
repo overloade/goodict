@@ -5,6 +5,10 @@
 //  Created by home on 12/02/2020.
 //  Copyright © 2020 home. All rights reserved.
 //
+//  *************
+//  TableViewController is used for show all picked words with translations and examples
+//  Supports delete function.
+//  *************
 import Foundation
 import UIKit
 import CoreData

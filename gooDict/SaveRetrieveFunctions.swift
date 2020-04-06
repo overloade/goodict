@@ -5,6 +5,9 @@
 //  Created by home on 26/02/2020.
 //  Copyright © 2020 home. All rights reserved.
 //
+//  *************
+//  There are bunch of service functions used for perform any (add, edit, delete, fetch, and so on) actions.
+//  *************
 import Foundation
 import CoreData
 import UIKit

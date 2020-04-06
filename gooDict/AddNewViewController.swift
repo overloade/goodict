@@ -5,6 +5,10 @@
 //  Created by home on 12/02/2020.
 //  Copyright © 2020 home. All rights reserved.
 //
+//  *************
+//  AddViewController is used for ADD and EDIT actions on given word.
+//  *************
+
 import Foundation
 import UIKit
 import CoreData

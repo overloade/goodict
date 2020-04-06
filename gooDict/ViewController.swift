@@ -5,6 +5,14 @@
 //  Created by home on 12/02/2020.
 //  Copyright © 2020 home. All rights reserved.
 //
+//  *************
+//  ViewController is the main ViewController, starting screen.
+//  Available actions:
+//  - search by word or translation,
+//  - random choice from base,
+//  - pick up all words that start with the definite letter,
+//  - add new word with translation and example.
+//  *************
 import UIKit
 import CoreData
 

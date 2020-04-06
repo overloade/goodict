@@ -5,6 +5,10 @@
 //  Created by home on 01/03/2020.
 //  Copyright © 2020 home. All rights reserved.
 //
+//  *************
+//  Separate ViewController that shows full text of word, translation, example fields for definite word.
+//  *************
+
 import Foundation
 import UIKit
 

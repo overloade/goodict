@@ -5,7 +5,9 @@
 //  Created by home on 01/03/2020.
 //  Copyright © 2020 home. All rights reserved.
 //
-
+//  *************
+//  Establishing connection with database (CoreData)
+//  *************
 import Foundation
 import CoreData
 import UIKit

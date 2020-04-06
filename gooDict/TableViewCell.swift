@@ -1,3 +1,7 @@
+//  *************
+//  TableViewCell is used for configuring cell in TableViewController
+//  *************
+
 import UIKit
 import Foundation
 

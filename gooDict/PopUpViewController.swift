@@ -5,6 +5,9 @@
 //  Created by home on 17/03/2020.
 //  Copyright © 2020 home. All rights reserved.
 //
+//  *************
+//  PopUp emerges when user press "Need some help" button, shows translation gotten by Yandex.translate.
+//  *************
 
 import UIKit
 
@@ -19,7 +22,6 @@ class PopUpViewController: ViewController {
 
     @IBOutlet weak var MessagePopUpView: UIView!
     @IBOutlet weak var textInsidePopUp: UILabel!
-    
     var popUpWord: String = ""
     
     @IBAction func closePopUp(_ sender: Any) {
