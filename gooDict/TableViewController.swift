@@ -16,9 +16,7 @@ import CoreData
 class TableViewController: UITableViewController {
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
-        if SaveRetrieveFunctions.isRandomMethodWasCalled == true {
-            saveRetrieve.randomInArrays()
-        }
+        if SaveRetrieveFunctions.isRandomMethodWasCalled == true { saveRetrieve.randomInArrays() }
         sender.endRefreshing()
         tableView.reloadData()
     }
