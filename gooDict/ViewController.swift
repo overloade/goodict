@@ -22,8 +22,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var pickerFromList: UIPickerView!
     
-    var pickerData: [String] = [String]()
-    
+    var pickerData = [String]()
     let callSaveRetrieveMethod = SaveRetrieveFunctions()
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -71,6 +70,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
         pickerData = ["A", "B", "C", "D", "E", "F", "G", "H", "I",
                       "J", "K", "L", "M", "N", "O", "P", "Q", "R",
                       "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -78,7 +78,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.pickerFromList.dataSource = self
         self.hideKeyboard()
     }
-    
+ 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         // Number of columns with data
         return 1
@@ -104,14 +104,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 }
 
 extension UIViewController {
+    
     func displayMessage(textMessage: String, newHandler: ((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(title: "Message", message: textMessage, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: newHandler)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-    func hideKeyboard()
-    {
+    
+    func hideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(UIViewController.dismissKeyboard))
@@ -119,8 +120,7 @@ extension UIViewController {
         view.addGestureRecognizer(tap)
     }
 
-    @objc func dismissKeyboard()
-    {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 }

@@ -15,6 +15,18 @@ import CoreData
 
 class TableViewController: UITableViewController {
     
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        if SaveRetrieveFunctions.isRandomMethodWasCalled == true {
+            saveRetrieve.randomInArrays()
+        }
+        sender.endRefreshing()
+        tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        SaveRetrieveFunctions.isRandomMethodWasCalled = false
+    }
+    
     var detailedWord = ""
     var detailedTranslation = ""
     var detailedExample = ""

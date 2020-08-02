@@ -22,7 +22,8 @@ class SaveRetrieveFunctions {
     var setExamples: [String] = [] // Array for Examples
     
     static var rowArray = [WordItem]()
-    
+    static var isRandomMethodWasCalled = false // variable using for refresing purpuse in TVC
+        
     init() {
         // deleteAllData()
         do {
@@ -167,6 +168,7 @@ class SaveRetrieveFunctions {
         row.textTranslation = setTranslations[randomInt]
         
         SaveRetrieveFunctions.rowArray.append(row)
+        SaveRetrieveFunctions.isRandomMethodWasCalled = true // for refreshing purpose
     }
     
     func addInArrays(newWord: String, newTranslation: String, newExample: String) -> Bool {

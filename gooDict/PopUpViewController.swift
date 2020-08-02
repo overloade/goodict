@@ -36,7 +36,10 @@ class PopUpViewController: ViewController {
         activityIndicatorView.frame = self.view.frame
         activityIndicatorView.center = self.view.center
         activityIndicatorView.startAnimating()
-        translate(text: popUpWord, into: "en-ru") { (translation, error) in self.textInsidePopUp.text = translation! }
+        // translate(text: popUpWord, into: "en-ru") { (translation, error) in self.textInsidePopUp.text = translation! }
+        translate(text: popUpWord, into: "en-ru", completion: {
+            (translation, error) in self.textInsidePopUp.text = translation!
+        })
      }
     
     override func viewDidLoad() {
@@ -68,11 +71,12 @@ class PopUpViewController: ViewController {
                      let response = response as? HTTPURLResponse,
                      (200 ..< 300).contains(response.statusCode),
                      error == nil else {
-                         completion(nil, error)
+                         completion("Error was occured", error)
                          return
                      }
                      let decoder = JSONDecoder()
                      let decodedJSON = try? decoder.decode(Translations.self, from: data)
+                    
                      completion(decodedJSON!.text[0], error)
                      self.activityIndicatorView.stopAnimating()
                      // completion(decodedJSON, error)
