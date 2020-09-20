@@ -255,43 +255,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Worditem" rowHeight="102" id="pcE-Vp-Qly" customClass="TableViewCell" customModule="gooDict">
-                                <rect key="frame" x="0.0" y="28" width="414" height="102"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Worditem" rowHeight="109" id="pcE-Vp-Qly" customClass="TableViewCell" customModule="gooDict">
+                                <rect key="frame" x="0.0" y="28" width="414" height="109"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pcE-Vp-Qly" id="Tfm-4F-hAt">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="102"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mou-8g-lfq">
-                                            <rect key="frame" x="20" y="18" width="343" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mou-8g-lfq">
+                                            <rect key="frame" x="20" y="12.666666666666671" width="343" height="20.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWT-mf-qF8">
-                                            <rect key="frame" x="20" y="42" width="343" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Translation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWT-mf-qF8">
+                                            <rect key="frame" x="20" y="42" width="343" height="20.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbT-WD-MSF">
-                                            <rect key="frame" x="20" y="69" width="343" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Example" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbT-WD-MSF">
+                                            <rect key="frame" x="20" y="71" width="343" height="20.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="DWT-mf-qF8" secondAttribute="trailing" constant="12" id="0dO-55-ATR"/>
-                                        <constraint firstItem="IbT-WD-MSF" firstAttribute="top" secondItem="DWT-mf-qF8" secondAttribute="bottom" constant="6" id="9R6-XC-UBp"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="IbT-WD-MSF" secondAttribute="trailing" constant="12" id="9Ss-kA-bL6"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="IbT-WD-MSF" secondAttribute="bottom" constant="1" id="AUj-eE-Cgx"/>
-                                        <constraint firstItem="DWT-mf-qF8" firstAttribute="top" secondItem="mou-8g-lfq" secondAttribute="bottom" constant="3" id="DgB-B7-o8m"/>
-                                        <constraint firstItem="DWT-mf-qF8" firstAttribute="leading" secondItem="Tfm-4F-hAt" secondAttribute="leadingMargin" id="Ugc-7D-5kh"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="mou-8g-lfq" secondAttribute="trailing" constant="12" id="cT8-2j-KP0"/>
-                                        <constraint firstItem="mou-8g-lfq" firstAttribute="leading" secondItem="Tfm-4F-hAt" secondAttribute="leadingMargin" id="du2-fh-YVK"/>
-                                        <constraint firstItem="IbT-WD-MSF" firstAttribute="leading" secondItem="Tfm-4F-hAt" secondAttribute="leadingMargin" id="i9b-2Z-XHu"/>
-                                        <constraint firstItem="mou-8g-lfq" firstAttribute="top" secondItem="Tfm-4F-hAt" secondAttribute="topMargin" constant="7" id="zlo-8D-6Ln"/>
+                                        <constraint firstItem="IbT-WD-MSF" firstAttribute="top" secondItem="DWT-mf-qF8" secondAttribute="bottom" constant="8.6699999999999999" id="2sO-6r-9AH"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="IbT-WD-MSF" secondAttribute="trailing" constant="12" id="GTf-lb-c9J"/>
+                                        <constraint firstItem="DWT-mf-qF8" firstAttribute="top" secondItem="mou-8g-lfq" secondAttribute="bottom" constant="9" id="MDm-Pa-54M"/>
+                                        <constraint firstItem="DWT-mf-qF8" firstAttribute="top" secondItem="mou-8g-lfq" secondAttribute="bottom" constant="9" id="SVM-24-V5e"/>
+                                        <constraint firstItem="IbT-WD-MSF" firstAttribute="leading" secondItem="Tfm-4F-hAt" secondAttribute="leadingMargin" id="YqB-aa-rbP"/>
+                                        <constraint firstItem="DWT-mf-qF8" firstAttribute="leading" secondItem="Tfm-4F-hAt" secondAttribute="leadingMargin" id="ZeO-fA-qix"/>
+                                        <constraint firstItem="mou-8g-lfq" firstAttribute="top" secondItem="Tfm-4F-hAt" secondAttribute="topMargin" constant="1.6699999999999999" id="ZtQ-Ug-EmZ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="DWT-mf-qF8" secondAttribute="trailing" constant="12" id="aR8-Tc-BmO"/>
+                                        <constraint firstItem="IbT-WD-MSF" firstAttribute="top" secondItem="DWT-mf-qF8" secondAttribute="bottom" constant="8.6699999999999999" id="bGo-U0-2EJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="IbT-WD-MSF" secondAttribute="bottom" constant="6.6699999999999999" id="gjh-Sy-Yd1"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="mou-8g-lfq" secondAttribute="trailing" constant="12" id="lhP-Sp-ig8"/>
+                                        <constraint firstItem="mou-8g-lfq" firstAttribute="leading" secondItem="Tfm-4F-hAt" secondAttribute="leadingMargin" id="qpx-Ng-VQ5"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -308,6 +310,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="All words" id="P65-uf-xHh"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="duX-c8-hHz">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refresh:" destination="Oja-me-86B" eventType="valueChanged" id="z8P-ds-og4"/>

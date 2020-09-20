@@ -36,8 +36,21 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
+    // Added support for any possible height of the cell (depend on the text inside it)
+    override func tableView(_ tableView: UITableView,
+                            estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         saveRetrieve = SaveRetrieveFunctions()
@@ -107,6 +120,10 @@ class TableViewController: UITableViewController {
           }
     }
     
+  
+    
+    /*
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
        // Make the first row larger to accommodate a custom cell.
         if indexPath.row >= 0 {
@@ -116,4 +133,5 @@ class TableViewController: UITableViewController {
         // Use the default size for all other rows.
         return UITableView.automaticDimension
     }
+    */
 }
