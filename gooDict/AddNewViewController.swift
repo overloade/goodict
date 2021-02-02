@@ -34,6 +34,11 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
          navigationController?.navigationBar.isHidden = false
      }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     override func viewDidLoad() {
         self.wordView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         self.trView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
@@ -68,11 +73,22 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
+     
+        if let userInfo = notification.userInfo,
+           let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= (keyboardSize.height/2.3)
+            }
+        }
+        
+        /*
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= (keyboardSize.height/2)
             }
         }
+        */
+        
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -122,7 +138,7 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
         
     func addNewData() {
         if callSaveRetrieveMethod.setWords.contains(wordView.text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)) {
-            displayMessage(textMessage: "Word have already been found in dictionary. Please, correct the word or mark with (2), (3), (4) tag version.", newHandler: nil)
+            displayMessage(textMessage: "Word have already been found in dictionary. Please, correct the word or mark it with (2), (3), (4) tag.", newHandler: nil)
         } else {
             callSaveRetrieveMethod.addInArrays(newWord: wordView.text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines), newTranslation: trView.text, newExample: exView.text) ? displayMessage(textMessage: "Successful.", newHandler: returnToStartingScreen) : displayMessage(textMessage: "Error occured.", newHandler: returnToStartingScreen)
         }

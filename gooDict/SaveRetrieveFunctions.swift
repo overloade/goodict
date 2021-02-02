@@ -171,6 +171,20 @@ class SaveRetrieveFunctions {
         SaveRetrieveFunctions.isRandomMethodWasCalled = true // for refreshing purpose
     }
     
+    func randomChoiceForLocalNotification() -> [String] {
+        
+        var tempArray: [String] = []
+        let randomInt = Int.random(in: 0...setWords.count-1)
+        
+        //print("setWords count = ", setWords.count)
+        
+        tempArray.append(setWords[randomInt])
+        tempArray.append(setTranslations[randomInt])
+        tempArray.append(setExamples[randomInt])
+      
+        return tempArray
+    }
+    
     func addInArrays(newWord: String, newTranslation: String, newExample: String) -> Bool {
         do {
             let userEntity = NSEntityDescription.entity(forEntityName: "EngDict", in: managedContext)!

@@ -13,8 +13,10 @@
 //  - pick up all words that start with the definite letter,
 //  - add new word with translation and example.
 //  *************
+
 import UIKit
 import CoreData
+import UserNotifications
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -22,8 +24,98 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var pickerFromList: UIPickerView!
     
+    @IBOutlet weak var turnOnOffNotifications: UISwitch!
+    var center: UNUserNotificationCenter!
+    
+    let defaults = UserDefaults.standard
+    
+    @objc func switchChanged(mySwitch: UISwitch) {
+        if mySwitch.isOn {
+            displayMessage(textMessage: "Notifications activated. Push every 10 min.", newHandler: nil)
+            
+            defaults.set(true, forKey: "UseBoost")
+            //let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                if let error = error {
+                    // Handle the error here.
+                }
+                // Provisional authorization granted.
+            }
+            
+            center.getDeliveredNotifications { [weak self] requests in
+                guard let self = self else { return }
+            }
+            
+            // Old notification's annihilation
+            //center.removeAllDeliveredNotifications() // To remove all delivered notifications
+            //center.removeAllPendingNotificationRequests() // To remove all pending notifications which are not delivered yet but scheduled.
+            
+            for i in 1..<11 {
+                let contentForContent = callSaveRetrieveMethod.randomChoiceForLocalNotification()
+                let content = UNMutableNotificationContent()
+                content.title = "\(contentForContent[0])"
+                content.badge = i as NSNumber
+                //content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber + 1)
+                content.body = "\(contentForContent[1]) (# \(contentForContent[2]))"
+                content.threadIdentifier = "gooDict identifier"
+                
+                let tempInterval = Double(i) * 1
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: tempInterval*60, repeats: false)
+                
+                // Create the request
+                let uuidString = UUID().uuidString
+                let request = UNNotificationRequest(identifier: uuidString,
+                                                    content: content,
+                                                    trigger: trigger)
+                center.add(request, withCompletionHandler: nil)
+            }
+            
+           
+        } else {
+            displayMessage(textMessage: "Notifications deactivated.", newHandler: nil)
+            defaults.set(false, forKey: "UseBoost")
+            UIApplication.shared.applicationIconBadgeNumber = 0
+           
+            center.removeAllDeliveredNotifications() // To remove all delivered notifications
+            center.removeAllPendingNotificationRequests() // To remove all pending notifications which are not delivered yet but scheduled.
+        }
+    }
+    
+    var delivered: Any?
+    
     var pickerData = [String]()
     let callSaveRetrieveMethod = SaveRetrieveFunctions()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // turnOnOffNotifications.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
+        
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        turnOnOffNotifications.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
+        
+        defaults.bool(forKey: "UseBoost") ? turnOnOffNotifications.setOn(true, animated: true) : turnOnOffNotifications.setOn(false, animated: true)
+      
+        center = UNUserNotificationCenter.current()
+        
+        navigationController?.navigationBar.isHidden = true
+        if callSaveRetrieveMethod.setWords.count > 0 {
+            totalAmount.text = String(callSaveRetrieveMethod.setWords.count)
+        } else { totalAmount.text = "0" }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+ 
+        pickerData = ["A", "B", "C", "D", "E", "F", "G", "H", "I",
+                      "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+                      "S", "T", "U", "V", "W", "X", "Y", "Z"]
+        
+        self.pickerFromList.delegate = self
+        self.pickerFromList.dataSource = self
+        self.hideKeyboard()
+    }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
@@ -59,24 +151,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             displayMessage(textMessage: "Nothing found", newHandler: nil)
             return false
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
-        if callSaveRetrieveMethod.setWords.count > 0 {
-            totalAmount.text = String(callSaveRetrieveMethod.setWords.count)
-        } else { totalAmount.text = "0" }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
- 
-        pickerData = ["A", "B", "C", "D", "E", "F", "G", "H", "I",
-                      "J", "K", "L", "M", "N", "O", "P", "Q", "R",
-                      "S", "T", "U", "V", "W", "X", "Y", "Z"]
-        self.pickerFromList.delegate = self
-        self.pickerFromList.dataSource = self
-        self.hideKeyboard()
     }
  
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

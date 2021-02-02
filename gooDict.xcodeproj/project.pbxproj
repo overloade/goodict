@@ -39,6 +39,7 @@
 		F403315E23F3778F004DB13B /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F41C2FEC24031BDB001896C5 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		F445B4F62406F4D1000EE8CE /* SaveRetrieveFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRetrieveFunctions.swift; sourceTree = "<group>"; };
+		F4555E8225B14F4F00D5B4D3 /* gooDict.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = gooDict.entitlements; sourceTree = "<group>"; };
 		F458841A240C1EC200C9A512 /* DetailedInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInfoViewController.swift; sourceTree = "<group>"; };
 		F458841C240C3C1700C9A512 /* CoreDataEntityValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntityValidationManager.swift; sourceTree = "<group>"; };
 		F458841E240C3FB000C9A512 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -80,6 +81,7 @@
 		F403314123F36C69004DB13B /* gooDict */ = {
 			isa = PBXGroup;
 			children = (
+				F4555E8225B14F4F00D5B4D3 /* gooDict.entitlements */,
 				F403314223F36C69004DB13B /* AppDelegate.swift */,
 				F403314423F36C69004DB13B /* SceneDelegate.swift */,
 				F403314623F36C69004DB13B /* ViewController.swift */,
@@ -130,7 +132,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = home;
 				TargetAttributes = {
 					F403313E23F36C69004DB13B = {
@@ -240,6 +242,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -300,6 +303,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -332,6 +336,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = gooDict/gooDict.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7LS6J555WQ;
 				INFOPLIST_FILE = gooDict/Info.plist;
@@ -350,6 +355,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = gooDict/gooDict.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7LS6J555WQ;
 				INFOPLIST_FILE = gooDict/Info.plist;

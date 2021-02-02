@@ -37,8 +37,8 @@ class PopUpViewController: ViewController {
         activityIndicatorView.center = self.view.center
         activityIndicatorView.startAnimating()
         // translate(text: popUpWord, into: "en-ru") { (translation, error) in self.textInsidePopUp.text = translation! }
-        translate(text: popUpWord, into: "en-ru", completion: {
-            (translation, error) in self.textInsidePopUp.text = translation!
+        translate(text: popUpWord, into: "en-ru", completion: { (translation, error) in
+            self.textInsidePopUp.text = translation ?? "Surprisingly, but Yandex closed this door."
         })
      }
     
@@ -71,7 +71,7 @@ class PopUpViewController: ViewController {
                      let response = response as? HTTPURLResponse,
                      (200 ..< 300).contains(response.statusCode),
                      error == nil else {
-                         completion("Error was occured", error)
+                         completion("Surprisingly, but Yandex closed this door.", error)
                          return
                      }
                      let decoder = JSONDecoder()
