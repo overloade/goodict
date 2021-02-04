@@ -169,7 +169,7 @@
         <!--Add New View Controller-->
         <scene sceneID="U4G-ip-WRI">
             <objects>
-                <viewController id="212-QM-Il5" customClass="AddNewViewController" customModule="gooDict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addNewVC" id="212-QM-Il5" customClass="AddNewViewController" customModule="gooDict" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yls-Uw-gx5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

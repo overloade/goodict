@@ -31,7 +31,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @objc func switchChanged(mySwitch: UISwitch) {
         if mySwitch.isOn {
-            displayMessage(textMessage: "Notifications activated. Push every 10 min.", newHandler: nil)
+            displayMessage(textMessage: "Notifications activated. Push 10 notificatons every 30 min.", newHandler: nil)
             
             defaults.set(true, forKey: "UseBoost")
             //let center = UNUserNotificationCenter.current()
@@ -54,12 +54,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 let contentForContent = callSaveRetrieveMethod.randomChoiceForLocalNotification()
                 let content = UNMutableNotificationContent()
                 content.title = "\(contentForContent[0])"
-                content.badge = i as NSNumber
-                //content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber + 1)
+                //content.badge = i as NSNumber // unavailable
+                //content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber + 1) // unavailable
                 content.body = "\(contentForContent[1]) (# \(contentForContent[2]))"
                 content.threadIdentifier = "gooDict identifier"
                 
-                let tempInterval = Double(i) * 1
+                let tempInterval = Double(i) * 10 * 3
                 
                 let trigger = UNTimeIntervalNotificationTrigger(timeInterval: tempInterval*60, repeats: false)
                 
@@ -132,7 +132,27 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                     if callSaveRetrieveMethod.searchInArrays(searchedWord: searchField.text!) {
                         return true
                     } else {
-                        displayMessage(textMessage: "Nothing found", newHandler: nil)
+                        //displayMessage(textMessage: "Nothing found", newHandler: nil)
+                        
+                        let alert = UIAlertController(title: "Message", message: "Nothing found in the dictionary.", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "Got it.", style: .cancel, handler: nil)
+                        let action1 = UIAlertAction(title: "Add as a new?", style: .default, handler: {action in useAsANewWord(alert: action) })
+                        alert.addAction(action)
+                        alert.addAction(action1)
+                        present(alert, animated: true, completion: nil)
+                        
+                        func useAsANewWord(alert: UIAlertAction!) {
+                            
+                            if let vc = storyboard?.instantiateViewController(withIdentifier: "addNewVC") as? AddNewViewController {
+                                
+                                vc.detailWord = searchField.text!
+
+                                navigationController?.pushViewController(vc, animated: true)
+                            }
+                            
+                            
+                        }
+                        
                         return false
                     }
                 }

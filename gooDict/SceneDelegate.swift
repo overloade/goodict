@@ -31,22 +31,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         
         // UIApplication.shared.applicationIconBadgeNumber = 0
+        /*
         let state = UIApplication.shared.applicationState
         switch state {
             
         case .inactive:
-            print("Inactive")
-            
             if UIApplication.shared.applicationIconBadgeNumber > 0 {
                 UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber - 1
             }
             
         case .background:
-            print("Background")
+            print("background")
             // update badge count here
             
         case .active:
-            print("Active, badges = ", UIApplication.shared.applicationIconBadgeNumber)
             
             if UIApplication.shared.applicationIconBadgeNumber > 0 {
                 UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber - 1
@@ -55,6 +53,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         @unknown default:
             fatalError("Frigging state.")
         }
+        */
         
     }
 
