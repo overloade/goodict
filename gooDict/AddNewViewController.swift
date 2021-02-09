@@ -16,7 +16,8 @@ import CoreData
 class AddNewViewController: UIViewController, UITextViewDelegate {
     
     let callSaveRetrieveMethod = SaveRetrieveFunctions()
-    var checkEditOrAdd = true // checker
+    var shouldBeEdited = false // checker: if AddNewViewController was called on from DeteiledInfoVC
+                               // and should trigger "Editing" scenario instead of "Adding"
    
     @IBOutlet weak var wordView: UITextView!
     @IBOutlet weak var trView: UITextView!
@@ -65,10 +66,9 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
                                                name: UIResponder.keyboardWillHideNotification, object: nil)
     
-        if wordView.text!.isEmpty && trView.text!.isEmpty && exView.text!.isEmpty {
-            checkEditOrAdd = false
-        } else {
-            return
+        // Check if wordView & trView & exView were prefilled from DetailedInfoVC and it should trigger "Editing" action
+        if !wordView.text!.isEmpty && !trView.text!.isEmpty && !exView.text!.isEmpty {
+            shouldBeEdited = true
         }
     }
     
@@ -104,15 +104,12 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         let maxHeight = UIScreen.main.bounds.height - 20 // was 20
         let fixedWidth = textView.frame.size.width
-        let wordViewNewSize = wordView.sizeThatFits(CGSize(width: fixedWidth, height: maxHeight))
-        let trViewNewSize = trView.sizeThatFits(CGSize(width: fixedWidth, height: maxHeight))
-        let exViewNewSize = exView.sizeThatFits(CGSize(width: fixedWidth, height: maxHeight))
- 
-        wordView.frame.size = wordViewNewSize
+        
+        wordView.frame.size = wordView.sizeThatFits(CGSize(width: fixedWidth, height: maxHeight))
         wordView.center = view.center
-        trView.frame.size = trViewNewSize
+        trView.frame.size = trView.sizeThatFits(CGSize(width: fixedWidth, height: maxHeight))
         trView.center = view.center
-        exView.frame.size = exViewNewSize
+        exView.frame.size = exView.sizeThatFits(CGSize(width: fixedWidth, height: maxHeight))
         exView.center = view.center
     }
  
@@ -122,8 +119,8 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
         editedExample = exView.text!
         
         if wordView.text!.isEmpty || trView.text!.isEmpty || exView.text!.isEmpty {
-            displayMessage(textMessage: "One of the strings is empty. Please fill in all fields.",                             newHandler: nil)
-        } else { checkEditOrAdd ? editData() : addNewData() }
+            displayMessage(textMessage: "One of the strings is empty. Please, fill in all fields.",                             newHandler: nil)
+        } else { shouldBeEdited ? editData() : addNewData() }
     }
     
     func returnToStartingScreen(alert: UIAlertAction!) {
@@ -132,15 +129,20 @@ class AddNewViewController: UIViewController, UITextViewDelegate {
     }
     
     func editData() {
-        callSaveRetrieveMethod.editInArrays(oldWord: detailWord, oldTranslation: detailTranslation, oldExample: detailExample, newWord: editedWord, newTranslation: editedTranslation, newExample: editedExample) ?
+        callSaveRetrieveMethod.editInArrays(oldWord: detailWord,
+                                            oldTranslation: detailTranslation,
+                                            oldExample: detailExample,
+                                            newWord: editedWord,
+                                            newTranslation: editedTranslation,
+                                            newExample: editedExample) ?
             displayMessage(textMessage: "Successfully edited.", newHandler: returnToStartingScreen) : displayMessage(textMessage: "Error occured.", newHandler: nil)
     }
         
     func addNewData() {
         if callSaveRetrieveMethod.setWords.contains(wordView.text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)) {
-            displayMessage(textMessage: "Word have already been found in dictionary. Please, correct the word or mark it with (2), (3), (4) tag.", newHandler: nil)
+            displayMessage(textMessage: "Word has already been found in the dictionary. Please, correct the word or mark it with (2), (3), (4) tag.", newHandler: nil)
         } else {
-            callSaveRetrieveMethod.addInArrays(newWord: wordView.text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines), newTranslation: trView.text, newExample: exView.text) ? displayMessage(textMessage: "Successful.", newHandler: returnToStartingScreen) : displayMessage(textMessage: "Error occured.", newHandler: returnToStartingScreen)
+            callSaveRetrieveMethod.addInArrays(newWord: wordView.text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines), newTranslation: trView.text, newExample: exView.text) ? displayMessage(textMessage: "Successfully added.", newHandler: returnToStartingScreen) : displayMessage(textMessage: "Error occured.", newHandler: returnToStartingScreen)
         }
     }
 }
